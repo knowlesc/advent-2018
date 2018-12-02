@@ -1,0 +1,9 @@
+{
+  "name": "advent-2018",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typescript": "^3.2.1",
+    "@types/node": "^10.12.11"
+  }
+}
