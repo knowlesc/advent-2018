@@ -48,3 +48,4 @@ var Day1 = /** @class */ (function (_super) {
 }(solver_1.Solver));
 exports.Day1 = Day1;
 new Day1().run();
+//# sourceMappingURL=day1.js.map
