@@ -26,7 +26,7 @@ var Solver = /** @class */ (function () {
         var output = fn(input);
         var elapsed = perf_hooks_1.performance.now() - now;
         console.log("Output: " + output);
-        console.log("Elapsed time: " + elapsed.toFixed(0) + "ms\n");
+        console.log("Elapsed time: " + elapsed.toFixed(3) + "ms\n");
     };
     return Solver;
 }());

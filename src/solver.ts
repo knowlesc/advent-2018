@@ -33,6 +33,6 @@ export abstract class Solver<T> {
     const elapsed = performance.now() - now;
 
     console.log(`Output: ${output}`);
-    console.log(`Elapsed time: ${elapsed.toFixed(0)}ms\n`);
+    console.log(`Elapsed time: ${elapsed.toFixed(3)}ms\n`);
   }
 }
