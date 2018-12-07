@@ -11,8 +11,8 @@ export abstract class Solver<T> {
   run() {
     const input = this.formatInput(this.readInputAsArray(this.inputFile));
 
-    this.solutions.forEach((solution) => {
-      this.profileFunction(solution, input);
+    this.solutions.forEach((solution, i) => {
+      this.profileFunction(solution, input, `part ${i + 1}`);
     });
   }
 
@@ -23,9 +23,9 @@ export abstract class Solver<T> {
       .filter((line) => line.length > 0);
   }
 
-  private profileFunction(fn: Solution<T>, input: T[]) {
+  private profileFunction(fn: Solution<T>, input: T[], name: string) {
     console.log(`\n----------------------`);
-    console.log(`Executing ${fn.name}`);
+    console.log(`Executing ${name}`);
     console.log(`----------------------\n`);
 
     const now = performance.now();
