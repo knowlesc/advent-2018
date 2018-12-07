@@ -17,7 +17,7 @@ var Day2 = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.inputFile = './inputs/day2.txt';
         _this.solutions = [
-            function part1(input) {
+            function (input) {
                 var lettersAppearingTwoTimes = 0;
                 var lettersAppearingThreeTimes = 0;
                 input.forEach(function (id) {
@@ -49,7 +49,7 @@ var Day2 = /** @class */ (function (_super) {
                 });
                 return lettersAppearingThreeTimes * lettersAppearingTwoTimes;
             },
-            function part2(input) {
+            function (input) {
                 var answer = null;
                 input.some(function (id, i) {
                     var candidates = input.slice(i + 1);

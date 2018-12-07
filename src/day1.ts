@@ -8,11 +8,11 @@ export class Day1 extends Solver<number> {
   }
 
   solutions = [
-    function part1(input: number[]) {
+    (input: number[]) => {
       return input.reduce((a, b) => a + b);
     },
 
-    function part2(input: number[]) {
+    (input: number[]) => {
       let output = null;
       let i = 0;
       let total = 0;

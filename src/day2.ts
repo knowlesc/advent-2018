@@ -8,7 +8,7 @@ export class Day2 extends Solver<string> {
   }
 
   solutions = [
-    function part1(input: string[]) {
+    (input: string[]) => {
       let lettersAppearingTwoTimes = 0;
       let lettersAppearingThreeTimes = 0;
 
@@ -45,7 +45,7 @@ export class Day2 extends Solver<string> {
       return lettersAppearingThreeTimes * lettersAppearingTwoTimes;
     },
 
-    function part2(input: string[]) {
+    (input: string[]) => {
       let answer: string = null;
 
       input.some((id, i) => {

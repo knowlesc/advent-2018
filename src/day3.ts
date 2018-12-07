@@ -8,28 +8,6 @@ interface claim {
   height: number;
 }
 
-function generateFabricArray(input: claim[]) {
-  const fabricSize = 1000;
-  const fabric: number[][] = [];
-
-  for (let y = 0; y < fabricSize; y++) {
-    fabric.push([]);
-    for (let x = 0; x < fabricSize; x++) {
-      fabric[y].push(0);
-    }
-  }
-
-  input.forEach((claim) => {
-    for (let i = claim.top; i < claim.top + claim.height; i++) {
-      for (let j = claim.left; j < claim.left + claim.width; j++) {
-        fabric[i][j]++;
-      }
-    }
-  });
-
-  return fabric;
-}
-
 export class Day3 extends Solver<claim> {
   inputFile = './inputs/day3.txt';
 
@@ -47,15 +25,37 @@ export class Day3 extends Solver<claim> {
     });
   }
 
+  private generateFabricArray(input: claim[]) {
+    const fabricSize = 1000;
+    const fabric: number[][] = [];
+
+    for (let y = 0; y < fabricSize; y++) {
+      fabric.push([]);
+      for (let x = 0; x < fabricSize; x++) {
+        fabric[y].push(0);
+      }
+    }
+
+    input.forEach((claim) => {
+      for (let i = claim.top; i < claim.top + claim.height; i++) {
+        for (let j = claim.left; j < claim.left + claim.width; j++) {
+          fabric[i][j]++;
+        }
+      }
+    });
+
+    return fabric;
+  }
+
   solutions = [
-    function part1(input: claim[]) {
-      return generateFabricArray(input)
+    (input: claim[]) => {
+      return this.generateFabricArray(input)
         .map((row) => row.reduce((sum, i) => sum + (i >= 2 ? 1 : 0)))
         .reduce((sum, i) => sum + i);
     },
 
-    function part2(input: claim[]) {
-      const fabric = generateFabricArray(input);
+    (input: claim[]) => {
+      const fabric = this.generateFabricArray(input);
 
       let answer: number = null;
       input.some((claim) => {

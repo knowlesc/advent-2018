@@ -11,22 +11,23 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var solver_1 = require("./solver");
-var wakingUp = 'wakes up';
-var startsShift = 'begins shift';
-var getHighestValueKey = function (obj) { return Object.keys(obj)
-    .reduce(function (a, b) { return obj[a] > obj[b] ? a : b; }); };
+var actions;
+(function (actions) {
+    actions["wakingUp"] = "wakes up";
+    actions["startsShift"] = "begins shift";
+})(actions || (actions = {}));
 var Day4 = /** @class */ (function (_super) {
     __extends(Day4, _super);
     function Day4() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.inputFile = './inputs/day4.txt';
         _this.solutions = [
-            function part1(input) {
+            function (input) {
                 var guardTotals = {};
                 input.forEach(function (nap) {
                     guardTotals[nap.guard] = (guardTotals[nap.guard] || 0) + (nap.end - nap.start);
                 });
-                var mostAsleepGuard = getHighestValueKey(guardTotals);
+                var mostAsleepGuard = _this.getHighestValueKey(guardTotals);
                 var guardNaps = input.filter(function (nap) { return nap.guard === mostAsleepGuard; });
                 var frequency = {};
                 guardNaps.forEach(function (nap) {
@@ -34,17 +35,17 @@ var Day4 = /** @class */ (function (_super) {
                         frequency[time] = (frequency[time] || 0) + 1;
                     }
                 });
-                var mostAsleepMinute = getHighestValueKey(frequency);
+                var mostAsleepMinute = _this.getHighestValueKey(frequency);
                 return Number(mostAsleepMinute) * Number(mostAsleepGuard);
             },
-            function part2(input) {
+            function (input) {
                 var guardFrequencies = {};
                 input.forEach(function (nap) {
                     for (var time = nap.start; time < nap.end; time++) {
                         guardFrequencies[nap.guard + "_" + time] = (guardFrequencies[nap.guard + "_" + time] || 0) + 1;
                     }
                 });
-                var mostAsleepGuardMinute = getHighestValueKey(guardFrequencies).split('_');
+                var mostAsleepGuardMinute = _this.getHighestValueKey(guardFrequencies).split('_');
                 return Number(mostAsleepGuardMinute[0]) * Number(mostAsleepGuardMinute[1]);
             }
         ];
@@ -62,10 +63,10 @@ var Day4 = /** @class */ (function (_super) {
         var formattedInput = [];
         var currentGuard = '';
         sorted.forEach(function (a) {
-            if (a.action === startsShift) {
+            if (a.action === actions.startsShift) {
                 currentGuard = a.guard;
             }
-            else if (a.action === wakingUp) {
+            else if (a.action === actions.wakingUp) {
                 formattedInput[formattedInput.length - 1].end = a.time.getMinutes();
             }
             else {
@@ -73,6 +74,9 @@ var Day4 = /** @class */ (function (_super) {
             }
         });
         return formattedInput;
+    };
+    Day4.prototype.getHighestValueKey = function (obj) {
+        return Object.keys(obj).reduce(function (a, b) { return obj[a] > obj[b] ? a : b; });
     };
     return Day4;
 }(solver_1.Solver));

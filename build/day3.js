@@ -11,37 +11,19 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var solver_1 = require("./solver");
-function generateFabricArray(input) {
-    var fabricSize = 1000;
-    var fabric = [];
-    for (var y = 0; y < fabricSize; y++) {
-        fabric.push([]);
-        for (var x = 0; x < fabricSize; x++) {
-            fabric[y].push(0);
-        }
-    }
-    input.forEach(function (claim) {
-        for (var i = claim.top; i < claim.top + claim.height; i++) {
-            for (var j = claim.left; j < claim.left + claim.width; j++) {
-                fabric[i][j]++;
-            }
-        }
-    });
-    return fabric;
-}
 var Day3 = /** @class */ (function (_super) {
     __extends(Day3, _super);
     function Day3() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.inputFile = './inputs/day3.txt';
         _this.solutions = [
-            function part1(input) {
-                return generateFabricArray(input)
+            function (input) {
+                return _this.generateFabricArray(input)
                     .map(function (row) { return row.reduce(function (sum, i) { return sum + (i >= 2 ? 1 : 0); }); })
                     .reduce(function (sum, i) { return sum + i; });
             },
-            function part2(input) {
-                var fabric = generateFabricArray(input);
+            function (input) {
+                var fabric = _this.generateFabricArray(input);
                 var answer = null;
                 input.some(function (claim) {
                     for (var i = claim.top; i < claim.top + claim.height; i++) {
@@ -70,6 +52,24 @@ var Day3 = /** @class */ (function (_super) {
                 height: parseInt(groups[5])
             };
         });
+    };
+    Day3.prototype.generateFabricArray = function (input) {
+        var fabricSize = 1000;
+        var fabric = [];
+        for (var y = 0; y < fabricSize; y++) {
+            fabric.push([]);
+            for (var x = 0; x < fabricSize; x++) {
+                fabric[y].push(0);
+            }
+        }
+        input.forEach(function (claim) {
+            for (var i = claim.top; i < claim.top + claim.height; i++) {
+                for (var j = claim.left; j < claim.left + claim.width; j++) {
+                    fabric[i][j]++;
+                }
+            }
+        });
+        return fabric;
     };
     return Day3;
 }(solver_1.Solver));

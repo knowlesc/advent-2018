@@ -17,10 +17,10 @@ var Day1 = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.inputFile = './inputs/day1.txt';
         _this.solutions = [
-            function part1(input) {
+            function (input) {
                 return input.reduce(function (a, b) { return a + b; });
             },
-            function part2(input) {
+            function (input) {
                 var output = null;
                 var i = 0;
                 var total = 0;

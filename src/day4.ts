@@ -6,11 +6,12 @@ interface nap {
   guard: string;
 }
 
+enum actions {
+  wakingUp = 'wakes up',
+  startsShift = 'begins shift'
+}
+
 type lookup = { [key: string]: number };
-const wakingUp = 'wakes up';
-const startsShift = 'begins shift';
-const getHighestValueKey = (obj: lookup) => Object.keys(obj)
-  .reduce((a, b) => obj[a] > obj[b] ? a : b);
 
 export class Day4 extends Solver<nap> {
   inputFile = './inputs/day4.txt';
@@ -30,9 +31,9 @@ export class Day4 extends Solver<nap> {
     let formattedInput: nap[] = [];
     let currentGuard = '';
     sorted.forEach((a) => {
-      if (a.action === startsShift) {
+      if (a.action === actions.startsShift) {
         currentGuard = a.guard;
-      } else if (a.action === wakingUp) {
+      } else if (a.action === actions.wakingUp) {
         formattedInput[formattedInput.length - 1].end = a.time.getMinutes();
       } else {
         formattedInput.push({ guard: currentGuard, start: a.time.getMinutes(), end: null });
@@ -42,14 +43,18 @@ export class Day4 extends Solver<nap> {
     return formattedInput;
   }
 
+  private getHighestValueKey(obj: lookup) {
+    return Object.keys(obj).reduce((a, b) => obj[a] > obj[b] ? a : b);
+  }
+
   solutions = [
-    function part1(input: nap[]) {
+    (input: nap[]) => {
       const guardTotals: lookup = {};
       input.forEach((nap) => {
         guardTotals[nap.guard] = (guardTotals[nap.guard] || 0) + (nap.end - nap.start);
       });
 
-      const mostAsleepGuard = getHighestValueKey(guardTotals);
+      const mostAsleepGuard = this.getHighestValueKey(guardTotals);
 
       const guardNaps = input.filter((nap) => nap.guard === mostAsleepGuard);
 
@@ -60,12 +65,12 @@ export class Day4 extends Solver<nap> {
         }
       });
 
-      const mostAsleepMinute = getHighestValueKey(frequency);
+      const mostAsleepMinute = this.getHighestValueKey(frequency);
 
       return Number(mostAsleepMinute) * Number(mostAsleepGuard);
     },
 
-    function part2(input: nap[]) {
+    (input: nap[]) => {
       const guardFrequencies: lookup = {};
       input.forEach((nap) => {
         for (let time = nap.start; time < nap.end; time++) {
@@ -73,7 +78,7 @@ export class Day4 extends Solver<nap> {
         }
       });
 
-      const mostAsleepGuardMinute = getHighestValueKey(guardFrequencies).split('_');
+      const mostAsleepGuardMinute = this.getHighestValueKey(guardFrequencies).split('_');
 
       return Number(mostAsleepGuardMinute[0]) * Number(mostAsleepGuardMinute[1]);
     }
