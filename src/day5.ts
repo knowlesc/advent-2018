@@ -1,7 +1,5 @@
 import { Solver } from './solver';
 
-
-
 export class Day5 extends Solver<string> {
   inputFile = './inputs/day5.txt';
 
