@@ -7,9 +7,8 @@ var Solver = /** @class */ (function () {
     }
     Solver.prototype.run = function () {
         var _this = this;
-        var input = this.formatInput(this.readInputAsArray(this.inputFile));
         this.solutions.forEach(function (solution, i) {
-            _this.profileFunction(solution, input, "part " + (i + 1));
+            _this.profileFunction(solution, "part " + (i + 1));
         });
     };
     Solver.prototype.readInputAsArray = function (filename) {
@@ -18,11 +17,12 @@ var Solver = /** @class */ (function () {
             .split(/\r?\n/)
             .filter(function (line) { return line.length > 0; });
     };
-    Solver.prototype.profileFunction = function (fn, input, name) {
+    Solver.prototype.profileFunction = function (fn, name) {
         console.log("\n----------------------");
         console.log("Executing " + name);
         console.log("----------------------\n");
         var now = perf_hooks_1.performance.now();
+        var input = this.formatInput(this.readInputAsArray(this.inputFile));
         var output = fn(input);
         var elapsed = perf_hooks_1.performance.now() - now;
         console.log("Output: " + output);

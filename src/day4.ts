@@ -13,7 +13,7 @@ enum actions {
 
 type lookup = { [key: string]: number };
 
-export class Day4 extends Solver<nap> {
+export class Day4 extends Solver<nap[]> {
   inputFile = './inputs/day4.txt';
 
   formatInput(input: string[]) {

@@ -4,7 +4,7 @@ export class Day5 extends Solver<string> {
   inputFile = './inputs/day5.txt';
 
   formatInput(input: string[]) {
-    return input;
+    return input[0];
   }
 
   private isLower(char: string) {
@@ -47,16 +47,16 @@ export class Day5 extends Solver<string> {
   }
 
   solutions = [
-    (input: string[]) => {
-      return this.react(input[0].trim());
+    (input: string) => {
+      return this.react(input.trim());
     },
 
-    (input: string[]) => {
+    (input: string) => {
       let min = 50000;
 
       'abcdefghijklmnopqrstuvwxyz'.split('')
         .forEach((char) => {
-          const poly = input[0].replace(new RegExp(`[${char}${char.toUpperCase()}]`, 'g'), '');
+          const poly = input.replace(new RegExp(`[${char}${char.toUpperCase()}]`, 'g'), '');
           const length = this.react(poly);
           min = Math.min(min, length)
         });

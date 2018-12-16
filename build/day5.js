@@ -18,13 +18,13 @@ var Day5 = /** @class */ (function (_super) {
         _this.inputFile = './inputs/day5.txt';
         _this.solutions = [
             function (input) {
-                return _this.react(input[0].trim());
+                return _this.react(input.trim());
             },
             function (input) {
                 var min = 50000;
                 'abcdefghijklmnopqrstuvwxyz'.split('')
                     .forEach(function (char) {
-                    var poly = input[0].replace(new RegExp("[" + char + char.toUpperCase() + "]", 'g'), '');
+                    var poly = input.replace(new RegExp("[" + char + char.toUpperCase() + "]", 'g'), '');
                     var length = _this.react(poly);
                     min = Math.min(min, length);
                 });
@@ -34,7 +34,7 @@ var Day5 = /** @class */ (function (_super) {
         return _this;
     }
     Day5.prototype.formatInput = function (input) {
-        return input;
+        return input[0];
     };
     Day5.prototype.isLower = function (char) {
         return char === char.toLowerCase();

@@ -1,6 +1,6 @@
 import { Solver } from './solver';
 
-export class Day2 extends Solver<string> {
+export class Day2 extends Solver<string[]> {
   inputFile = './inputs/day2.txt';
 
   formatInput(input: string[]) {

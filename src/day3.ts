@@ -8,7 +8,7 @@ interface claim {
   height: number;
 }
 
-export class Day3 extends Solver<claim> {
+export class Day3 extends Solver<claim[]> {
   inputFile = './inputs/day3.txt';
 
   formatInput(input: string[]) {

@@ -2,7 +2,7 @@ import { Solver } from './solver';
 
 type coord = [number, number];
 
-export class Day6 extends Solver<coord> {
+export class Day6 extends Solver<coord[]> {
   inputFile = './inputs/day6.txt';
 
   formatInput(input: string[]) {
